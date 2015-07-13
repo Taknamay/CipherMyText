@@ -88,15 +88,16 @@ There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR P
 
 (define (decipher ct key)
   (let loop ((new-ct (sanitize ct))
-             (new-key (list->queue (sanitize key)))
+             (new-key (list->queue (reverse (sanitize key))))
              (pt '()))
     (if (null? new-ct)
         (list->string (reverse pt))
-        (let-values (((q next) (queue-remove new-key)))
-          (loop (cdr new-ct)
-                q
-                (cons (letter-subtract (car new-ct))
-                                       next))))))
+        (let-values (((q key-next) (queue-remove new-key)))
+          (display (queue->list q)) (newline ) (newline)
+          (let ((d-char (letter-subtract (car new-ct) key-next)))
+            (loop (cdr new-ct)
+                  (queue-insert q d-char)
+                  (cons d-char pt)))))))
 
 (define (restore-punctuation original modified)
   (let loop ((restored '())
