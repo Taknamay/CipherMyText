@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+gosh /usr/local/lib/automytext/automytext-cli.scm "$@"
+
