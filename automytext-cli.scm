@@ -48,6 +48,12 @@ Options:
 	      #t)
       (values args #f)))
 
+(define (check-undetected args)
+  (for-each (lambda (x)
+	      (if (char=? (string-ref x 0) #\-)
+		  (usage)))
+	    args))
+
 (define (main-prog args)
   (define-values (arg-iter iters)
     (extract-iterations args))
@@ -55,8 +61,6 @@ Options:
     (extract-mode arg-iter))
   (define-values (new-args punctuate)
     (extract-punct arg-mode))
-  (display new-args) (newline) (display iters) (newline) (display cipher-mode) (newline)
-  (display punctuate) (newline)
   (if (< iters 1)
       (error "automytext-cli" "Iterations must be at least 1."))
   (if (or (member "--help" new-args)
@@ -64,24 +68,12 @@ Options:
       (usage))
   (if (or (member "--version" new-args)
           (member "-v" new-args))
-      (version)))
+      (version))
+  (check-undetected new-args))
 
 (main-prog (cdr (command-line)))
 
 #|
-
-
-    punctuate = False
-    if ("-p" in args):
-        punctuate = True
-        args.remove("-p")
-
-    # Check to see if there are any undetected options
-    for i in args:
-        if (len(i) > 1):
-            if (i[0] == '-'):
-                print("Unknown option {0}".format(i))
-                exit(0)
 
     if (len(args) != 2):
         usage()
