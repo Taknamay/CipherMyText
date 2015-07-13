@@ -1,19 +1,20 @@
 
 (import (scheme base)
+        (scheme load)
         (scheme write)
         (scheme process-context))
 
-(include "autokey.scm")
+(load "autokey.scm")
 
 (define (usage)
   (display "Usage: automytext [options] [-e] <plaintext> <key>
        automytext [options] -d <ciphertext> <key>
 
 Options:
-      -h   Display this help text.
-      -i=? Set the number of iterations.
-      -p   Preserve the punctuation of the original message.
-      -v   Display the version of the software.\n")
+  -h   Display this help text.
+  -i=? Set the number of iterations.
+  -p   Preserve the punctuation of the original message.
+  -v   Display the version of the software.\n")
   (exit))
 
 (define (main-prog args)
