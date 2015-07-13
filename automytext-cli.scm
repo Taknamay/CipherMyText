@@ -28,7 +28,7 @@ Options:
                    (char=? (string-ref value 1) #\i))
               (if (not (char=? (string-ref value 2) #\=))
                   (usage)
-                  (values (append list-out
+                  (values (append (reverse list-out)
                                   (cdr list-in))
                           (string->number (substring value 3 (string-length value)))))
               (loop (cons value list-out) (cdr list-in)))))))
