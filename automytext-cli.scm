@@ -52,7 +52,9 @@ Options:
   (for-each (lambda (x)
 	      (if (char=? (string-ref x 0) #\-)
 		  (usage)))
-	    args))
+	    args)
+  (if (not (= (length args) 2))
+      (usage)))
 
 (define (main-prog args)
   (define-values (arg-iter iters)
@@ -74,9 +76,6 @@ Options:
 (main-prog (cdr (command-line)))
 
 #|
-
-    if (len(args) != 2):
-        usage()
 
     text = args[0]
     key = args[1]
