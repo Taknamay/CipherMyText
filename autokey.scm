@@ -93,7 +93,6 @@ There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR P
     (if (null? new-ct)
         (list->string (reverse pt))
         (let-values (((q key-next) (queue-remove new-key)))
-          (display (queue->list q)) (newline ) (newline)
           (let ((d-char (letter-subtract (car new-ct) key-next)))
             (loop (cdr new-ct)
                   (queue-insert q d-char)
