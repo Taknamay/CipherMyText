@@ -2,7 +2,8 @@
 (import (scheme base)
         (scheme load)
         (scheme write)
-        (scheme process-context))
+        (scheme process-context)
+	(srfi 1))
 
 (load "./autokey.scm")
 
@@ -27,14 +28,35 @@ Options:
 		   (char=? (string-ref value 1) #\i))
 	      (if (not (char=? (string-ref value 2) #\=))
 		  (usage)
-		  (values (append (reverse list-out)
+		  (values (append list-out
 				  (cdr list-in))
 			  (string->number (substring value 3 (string-length value)))))
 	      (loop (cons value list-out) (cdr list-in)))))))
 
+(define (extract-mode args)
+  (if (member "-d" args)
+      (values (delete "-d" args)
+	      'decipher)
+      (values (if (member "-e" args)
+		  (delete "-e" args)
+		  args)
+	      'encipher)))
+
+(define (extract-punct args)
+  (if (member "-p" args)
+      (values (delete "-p" args)
+	      #t)
+      (values args #f)))
+
 (define (main-prog args)
-  (define-values (new-args iters)
+  (define-values (arg-iter iters)
     (extract-iterations args))
+  (define-values (arg-mode cipher-mode)
+    (extract-mode arg-iter))
+  (define-values (new-args punctuate)
+    (extract-punct arg-mode))
+  (display new-args) (newline) (display iters) (newline) (display cipher-mode) (newline)
+  (display punctuate) (newline)
   (if (< iters 1)
       (error "automytext-cli" "Iterations must be at least 1."))
   (if (or (member "--help" new-args)
@@ -48,35 +70,6 @@ Options:
 
 #|
 
-    iterate = -1
-    for i in args:
-        if ("-i" in i):
-            if ("-i=" in i):
-                try:
-                    iterate = int(i[3:])
-                except ValueError:
-                    usage()
-                if (iterate < 1):
-                    print("Iterations must be at least 1.")
-                    exit(0)
-                args.remove(i)
-                break
-            else:
-                usage()
-    if (iterate == -1):
-        iterate = 1
-
-    mode = -1
-    if ("-e" in args):
-        mode = 0
-        args.remove("-e")
-    if ("-d" in args):
-        if (mode == 0):
-            usage()
-        mode = 1
-        args.remove("-d")
-    if (mode == -1):
-        mode = 0
 
     punctuate = False
     if ("-p" in args):
