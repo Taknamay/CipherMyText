@@ -94,27 +94,3 @@ Options:
   (xcipher (car new-args) (cadr new-args) cipher-mode iters punctuate))
 
 (main-prog (cdr (command-line)))
-
-#|
-
-text = args[0]
-key = args[1]
-
-for i in range(iterate):
-a = ''
-if (mode == 0):
-a = encipher(text, key)
-else:
-a = decipher(text, key)
-text = a
-if punctuate:
-a = restore_punctuation(args[0], a)
-print(a)
-else:
-for i in range(len(a)):
-if (i % 5 == 0 and i != 0):
-print(' ', end='')
-print(a[i], end='')
-print()
-
-|#
