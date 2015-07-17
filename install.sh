@@ -10,6 +10,6 @@ if [ ! -d "$LIB_TARGET" ]; then
   mkdir $LIB_TARGET
 fi
 
-cp *.scm $LIB_TARGET
+sh build.sh
 cp icon.svg $LIB_TARGET
-cp automytext $BIN_TARGET
+cp build/automytext $BIN_TARGET

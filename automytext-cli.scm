@@ -5,7 +5,7 @@
         (scheme process-context)
         (srfi 1))
 
-(load "./autokey.scm")
+(include "autokey.scm")
 
 (define (usage)
   (display "Usage: automytext [options] [-e] <plaintext> <key>

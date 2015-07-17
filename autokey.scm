@@ -1,4 +1,3 @@
-#!/usr/bin/env gosh
 
 ;; An implementation of the autokey cipher in Scheme
 
