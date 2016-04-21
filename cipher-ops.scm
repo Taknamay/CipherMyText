@@ -13,6 +13,7 @@
 ;;;
 
 (import (scheme base)
+        (scheme case-lambda)
         (scheme char))
 
 (define (letter? c)
@@ -73,6 +74,7 @@
                   (cons (car in-original) out))))))
 
 (define (apply-cipher ciph restore? s-in . rest-in)
+  ;; Higher level procedure that accepts and returns strings
   (define sl (string->list s-in))
   (define s (sanitize-chars sl))
   (define rest (map (lambda (s)
@@ -84,6 +86,24 @@
     (list->string (if restore?
                       (restore-punctuation sl result)
                       result))))
+
+(define print-letters
+  (case-lambda
+   ((s) (print-letters s #\space))
+   ((s pad)
+    ;; Space out the letters of s by groups of 5, and
+    ;; pad the end by repeating a character.
+    (let loop ((l (string->list s))
+               (i 0))
+      (if (null? l)
+          (display (make-string (- 5 i) pad))
+          (cond
+           ((< i 5)
+            (display (car l))
+            (loop (cdr l) (+ i 1)))
+           (else
+            (display " ")
+            (loop l 0))))))))
 
 (define (runkey-encipher pt-in key-in)
   ;; Simplest polyalphabetic cipher. Potentially useful
