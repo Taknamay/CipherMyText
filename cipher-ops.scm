@@ -72,6 +72,15 @@
                   in-modified
                   (cons (car in-original) out))))))
 
+(define (apply-cipher ciph pt-in . rest-in)
+  (define pt (sanitize-chars (string->list pt-in)))
+  (define rest (map (lambda (s)
+                      (if (string? s)
+                          (sanitize-chars (string->list s))
+                          s))
+                    rest-in))
+  (apply ciph pt rest))
+
 (define (runkey-encipher pt-in key-in)
   ;; Simplest polyalphabetic cipher. Potentially useful
   ;; as the base of other polyalphabetic ciphers.
