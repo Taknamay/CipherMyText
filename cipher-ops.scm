@@ -72,14 +72,18 @@
                   in-modified
                   (cons (car in-original) out))))))
 
-(define (apply-cipher ciph pt-in . rest-in)
-  (define pt (sanitize-chars (string->list pt-in)))
+(define (apply-cipher ciph restore? s-in . rest-in)
+  (define sl (string->list s-in))
+  (define s (sanitize-chars sl))
   (define rest (map (lambda (s)
                       (if (string? s)
                           (sanitize-chars (string->list s))
                           s))
                     rest-in))
-  (apply ciph pt rest))
+  (let ((result (apply ciph s rest)))
+    (list->string (if restore?
+                      (restore-punctuation sl result)
+                      result))))
 
 (define (runkey-encipher pt-in key-in)
   ;; Simplest polyalphabetic cipher. Potentially useful
