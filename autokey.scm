@@ -8,7 +8,6 @@
 
 (import (scheme base)
         (scheme load)
-        (scheme write)
         (class java.util (ArrayDeque queue)))
 
 (load "./cipher-ops.scm")
