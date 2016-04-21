@@ -15,19 +15,17 @@
 (define (autokey-encipher pt-in key-in)
   ;; Simply append the key to the plaintext, and then apply the
   ;; tabula recta
-  (define s (sanitize-chars pt-in))
-  (define k (append (sanitize-chars key-in) s))
-  (runkey-encipher s k))
+  (define k (append key-in pt-in))
+  (runkey-encipher pt-in k))
 
 (define (autokey-decipher ct-in key-in)
   ;; This is a bit more involved. As the plaintext is generated,
   ;; we must add it to the key. This lends itself well to a
   ;; queue, which you would probably need to simulate anyway
   ;; if you used something like a mutable vector.
-  (define s (sanitize-chars ct-in))
   (define k ::queue (queue))
-  (for-each k:add (sanitize-chars key-in))
-  (let loop ((ct s)
+  (for-each k:add key-in)
+  (let loop ((ct ct-in)
              (pt '()))
     (if (null? ct)
         (reverse pt)
