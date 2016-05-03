@@ -114,6 +114,21 @@
                                (letter->integer c)))
        pt-in))
 
+(define (mono-decipher ct-in key-in)
+  ;; Inverse of mono-encipher
+  (define vector-key (make-vector 26))
+  (let loop ((i 0)
+             (in key-in))
+    ;; We need to build the inverse key
+    (when (< i 26)
+      (vector-set! vector-key
+                   (letter->integer (car in))
+                   (integer->letter i))
+      (loop (+ i 1) (cdr in))))
+  (map (lambda (c) (vector-ref vector-key
+                               (letter->integer c)))
+       ct-in))
+
 (define (runkey-encipher pt-in key-in)
   ;; Simplest polyalphabetic cipher. Potentially useful
   ;; as the base of other polyalphabetic ciphers.
