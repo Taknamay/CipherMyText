@@ -7,10 +7,10 @@
 ;;;
 
 (import (scheme base)
-        (scheme load)
-        (class java.util (ArrayDeque queue)))
+        (scheme load))
 
 (load "./cipher-ops.scm")
+(load "./portability/kawa-queue.scm")
 
 (define (autokey-encipher pt-in key-in)
   ;; Simply append the key to the plaintext, and then apply the
@@ -23,15 +23,15 @@
   ;; we must add it to the key. This lends itself well to a
   ;; queue, which you would probably need to simulate anyway
   ;; if you used something like a mutable vector.
-  (define k ::queue (queue))
-  (for-each k:add key-in)
+  (define k (queue))
+  (for-each (lambda (i) (queue-add! k i)) key-in)
   (let loop ((ct ct-in)
              (pt '()))
     (if (null? ct)
         (reverse pt)
         (let ((key-next (letter- (car ct)
-                                 (k:remove))))
-          (k:add key-next)
+                                 (queue-remove! k))))
+          (queue-add! k key-next)
           (loop (cdr ct)
                 (cons key-next pt))))))
 
