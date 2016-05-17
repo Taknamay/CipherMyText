@@ -17,6 +17,9 @@
   (front get-front set-front!)
   (back get-back set-back!))
 
+(define (queue-empty? q)
+  (= (queue-length q) 0))
+
 (define (queue-front q)
   (if (queue-empty? q)
       (error "queue-front" "Referencing an empty queue")
@@ -66,7 +69,4 @@
 
 (define (queue . l)
   (list->queue l))
-
-(define (queue-empty? q)
-  (= (queue-length q) 0))
 
