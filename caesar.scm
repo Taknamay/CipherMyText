@@ -6,11 +6,6 @@
 ;;; License: GPLv3+
 ;;;
 
-(import (scheme base)
-        (scheme load))
-
-(load "./cipher-ops.scm")
-
 ;; This is easy to implement with our tabula recta
 
 (define (caesar-encipher pt-in key-in)

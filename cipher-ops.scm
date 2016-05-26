@@ -12,10 +12,6 @@
 ;;; License: GPLv3+
 ;;;
 
-(import (scheme base)
-        (scheme case-lambda)
-        (scheme char))
-
 (define (letter? c)
   ;; Is c an ASCII letter?
   (define n (char->integer c))

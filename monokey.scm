@@ -6,11 +6,6 @@
 ;;; License: GPLv3+
 ;;;
 
-(import (scheme base)
-        (scheme load))
-
-(load "./cipher-ops.scm")
-
 (define (mono-encipher pt-in key-in)
   ;; Encipher pt-in with a monoalphabetic cipher, where
   ;; key-in is a list of the letters with which to replace

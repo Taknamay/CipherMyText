@@ -6,12 +6,6 @@
 ;;; License: GPLv3+
 ;;;
 
-(import (scheme base)
-        (scheme load))
-
-(load "./cipher-ops.scm")
-(load "./portability/kawa-queue.scm")
-
 (define (autokey-encipher pt-in key-in)
   ;; Simply append the key to the plaintext, and then apply the
   ;; tabula recta

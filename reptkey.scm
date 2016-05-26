@@ -6,12 +6,6 @@
 ;;; License: GPLv3+
 ;;;
 
-(import (scheme base)
-        (scheme load)
-        (srfi 1))
-
-(load "./cipher-ops.scm")
-
 (define (reptkey-xcipher pt-in key-in direction)
   ;; A repeating key cipher, commonly known as "Vigenere"
   ;; I reject that name because it has little to do with
