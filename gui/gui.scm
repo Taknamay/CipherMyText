@@ -5,7 +5,8 @@
 (import (class java.awt BorderLayout GridLayout Dimension Container)
         (class javax.swing
                JFrame JPanel JComboBox JButton SwingUtilities
-               JSeparator JLabel)
+               JSeparator JLabel JTextField JTextArea
+               JScrollPane)
         (macduffie cipher))
 
 (define frame ::JFrame #!null)
@@ -32,8 +33,14 @@
   (define grid-container ::JPanel (JPanel))
   ;; Declare components
   (define input-label ::JLabel (JLabel "Input text:"))
+  (define input-text (JTextArea))
+  (define input-text-pane (JScrollPane input-text))
+  (define key-label ::JLabel (JLabel "Key:"))
+  (define key-text (JTextField 20))
   (define go-button ::JButton (JButton "Hello world"))
   (define output-label ::JLabel (JLabel "Output text:"))
+  (define output-text (JTextArea))
+  (define output-text-pane (JScrollPane output-text))
   
   ;; Set the layout for gridLayout
   (grid-container:setLayout (GridLayout 0 2))  
@@ -47,8 +54,12 @@
   
   ;; Add components
   (grid-container:add input-label)
+  (grid-container:add input-text-pane)
+  (grid-container:add key-label)
+  (grid-container:add key-text)
   (grid-container:add go-button)
   (grid-container:add output-label)
+  (grid-container:add output-text-pane)
   
   (pane:add grid-container))
 
