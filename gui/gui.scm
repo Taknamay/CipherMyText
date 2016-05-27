@@ -10,10 +10,21 @@
 (define frame ::JFrame #!null)
 
 (define (addComponentsToPane pane ::Container)
+  (define gridContainer ::JPanel (JPanel))
   ;; Declare components
+  (define input-label ::JLabel (JLabel "Input text:"))
   (define go-button ::JButton (JButton "Hello world"))
+  (define output-label ::JLabel (JLabel "Output text:"))
+
+  ;; Set the layout for gridLayout
+  (gridContainer:setLayout (GridLayout 0 2))  
+  
   ;; Add components
-  (pane:add go-button))
+  (gridContainer:add input-label)
+  (gridContainer:add go-button)
+  (gridContainer:add output-label)
+
+  (pane:add gridContainer))
 
 (define (createAndShowGUI)
   ;; Create and set up the window
