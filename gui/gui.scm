@@ -9,35 +9,42 @@
 
 (define frame ::JFrame #!null)
 
-(define (addComponentsToPane pane ::Container)
-  (define gridContainer ::JPanel (JPanel))
+(define (add-components-to-pane pane ::Container)
+  (define grid-container ::JPanel (JPanel))
   ;; Declare components
   (define input-label ::JLabel (JLabel "Input text:"))
   (define go-button ::JButton (JButton "Hello world"))
   (define output-label ::JLabel (JLabel "Output text:"))
-
+  
   ;; Set the layout for gridLayout
-  (gridContainer:setLayout (GridLayout 0 2))  
+  (grid-container:setLayout (GridLayout 0 2))  
+  
+  ;; Set the listener for go-button
+  (go-button:addActionListener
+   (lambda (event)
+     (display event)
+     (newline)
+     (newline)))
   
   ;; Add components
-  (gridContainer:add input-label)
-  (gridContainer:add go-button)
-  (gridContainer:add output-label)
+  (grid-container:add input-label)
+  (grid-container:add go-button)
+  (grid-container:add output-label)
+  
+  (pane:add grid-container))
 
-  (pane:add gridContainer))
-
-(define (createAndShowGUI)
+(define (create-and-show-GUI)
   ;; Create and set up the window
   (set! frame (JFrame "CipherMyText!"))
   (frame:setDefaultCloseOperation JFrame:EXIT_ON_CLOSE)
   ;; Set up the content pane
-  (addComponentsToPane (frame:getContentPane))
+  (add-components-to-pane (frame:getContentPane))
   
   ;; Display the window
   (frame:pack)
   (frame:setVisible #t))
 
-(SwingUtilities:invokeLater (runnable createAndShowGUI))
+(SwingUtilities:invokeLater (runnable create-and-show-GUI))
 
 #|
 
