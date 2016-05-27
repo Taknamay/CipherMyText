@@ -31,6 +31,7 @@
 
 (define (add-components-to-pane pane ::Container)
   (define grid-container ::JPanel (JPanel))
+  (define layout ::GridLayout (GridLayout 0 2))
   ;; Declare components
   (define input-label ::JLabel (JLabel "Input text:"))
   (define input-text (JTextArea))
@@ -41,9 +42,13 @@
   (define output-label ::JLabel (JLabel "Output text:"))
   (define output-text (JTextArea))
   (define output-text-pane (JScrollPane output-text))
+
+  ;; Set the gap for the grid
+  (layout:setHgap 25)
+  (layout:setVgap 25)
   
   ;; Set the layout for gridLayout
-  (grid-container:setLayout (GridLayout 0 2))  
+  (grid-container:setLayout layout)
   
   ;; Set the listener for go-button
   (go-button:addActionListener
