@@ -34,17 +34,22 @@
   (define layout ::GridLayout (GridLayout 0 2))
   ;; Declare components
   (define input-label ::JLabel (JLabel "Input text:"))
-  (define input-text (JTextArea))
-  (define input-text-pane (JScrollPane input-text))
+  (define input-text ::JTextArea (JTextArea))
+  (define input-text-pane ::JScrollPane (JScrollPane input-text))
   (define key-label ::JLabel (JLabel "Key:"))
-  (define key-text (JTextField 20))
-  (define radio-encipher (JRadioButton "Encipher"))
-  (define radio-decipher (JRadioButton "Decipher"))
-  (define cipher-mode (JPanel))
+  (define key-text ::JTextField (JTextField 20))
+  (define radio-encipher ::JRadioButton (JRadioButton "Encipher"))
+  (define radio-decipher ::JRadioButton (JRadioButton "Decipher"))
+  (define cipher-mode ::JPanel (JPanel))
+  (define cipher-kind ::JComboBox
+    (JComboBox
+     (apply String[]
+            (map (lambda (p)
+                   (vector-ref (cdr p) 0)) cipher-list))))
   (define go-button ::JButton (JButton "Hello world"))
   (define output-label ::JLabel (JLabel "Output text:"))
-  (define output-text (JTextArea))
-  (define output-text-pane (JScrollPane output-text))
+  (define output-text ::JTextArea (JTextArea))
+  (define output-text-pane ::JScrollPane (JScrollPane output-text))
 
   ;; Set the gap for the grid
   (layout:setHgap 25)
@@ -66,11 +71,20 @@
   ;; Add buttons to cipher-mode
   (cipher-mode:add radio-encipher)
   (cipher-mode:add radio-decipher)
+  (radio-encipher:setSelected #t)
 
   ;; Group buttons for cipher-mode
   (let ((g (ButtonGroup)))
     (g:add radio-encipher)
     (g:add radio-decipher))
+
+  ;; Set up cipher-kind
+  (cipher-kind:setSelectedIndex 0)
+  (cipher-kind:addActionListener
+   (lambda (event)
+     (display event)
+     (newline)
+     (newline)))
   
   ;; Add components
   (grid-container:add input-label)
