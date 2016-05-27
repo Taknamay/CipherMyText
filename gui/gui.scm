@@ -42,10 +42,13 @@
   (define radio-decipher ::JRadioButton (JRadioButton "Decipher"))
   (define cipher-mode ::JPanel (JPanel))
   (define cipher-kind ::JComboBox
-    (JComboBox
-     (apply String[]
-            (map (lambda (p)
-                   (vector-ref (cdr p) 0)) cipher-list))))
+    (let ()
+      (define x ::String[]
+        (apply String[]
+               (map (lambda (p)
+                      (vector-ref (cdr p) 0))
+                    cipher-list)))
+      (JComboBox x)))
   (define go-button ::JButton (JButton "Hello world"))
   (define output-label ::JLabel (JLabel "Output text:"))
   (define output-text ::JTextArea (JTextArea))
@@ -92,6 +95,7 @@
   (grid-container:add key-label)
   (grid-container:add key-text)
   (grid-container:add cipher-mode)
+  (grid-container:add cipher-kind)
   (grid-container:add (JPanel))
   (grid-container:add go-button)
   (grid-container:add output-label)
