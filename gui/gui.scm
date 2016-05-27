@@ -16,7 +16,7 @@
   `(("Autokey" ,autokey-encipher ,autokey-decipher)
     ("Reptkey (Vigenere)" ,reptkey-encipher ,reptkey-decipher)
     ("Monoalphabetic" ,mono-encipher ,mono-decipher)
-    ("Caesar" ,caesar-encipher caesar-decipher)
+    ("Caesar" ,caesar-encipher ,caesar-decipher)
     ("ROT13" ,rot13 ,rot13)))
 
 (define (add-components-to-pane pane ::Container)
@@ -36,7 +36,7 @@
       (define x ::String[]
         (apply String[] (map car cipher-list)))
       (JComboBox x)))
-  (define go-button ::JButton (JButton "Hello world"))
+  (define go-button ::JButton (JButton "Go!"))
   (define output-label ::JLabel (JLabel "Output text:"))
   (define output-text ::JTextArea (JTextArea))
   (define output-text-pane ::JScrollPane (JScrollPane output-text))
@@ -54,7 +54,12 @@
   ;; Set the listener for go-button
   (go-button:addActionListener
    (lambda (event)
-     (display event)
+     (define encipher? (radio-encipher:isSelected))
+     (define kind cipher-kind:SelectedItem)
+     (define proc
+       (list-ref (assoc kind cipher-list)
+                 (if encipher? 1 2)))
+     (display proc)
      (newline)
      (newline)))
 
