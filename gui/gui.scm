@@ -10,7 +10,10 @@
 (define frame ::JFrame #!null)
 
 (define (addComponentsToPane pane ::Container)
-  0)
+  ;; Declare components
+  (define go-button ::JButton (JButton "Hello world"))
+  ;; Add components
+  (pane:add go-button))
 
 (define (createAndShowGUI)
   ;; Create and set up the window
@@ -18,6 +21,7 @@
   (frame:setDefaultCloseOperation JFrame:EXIT_ON_CLOSE)
   ;; Set up the content pane
   (addComponentsToPane (frame:getContentPane))
+  
   ;; Display the window
   (frame:pack)
   (frame:setVisible #t))
