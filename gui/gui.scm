@@ -13,21 +13,11 @@
 
 (define cipher-list
   ;; Create an association lists for the ciphers
-  `((autokey . ,(vector "Autokey"
-                        autokey-encipher
-                        autokey-decipher))
-    (reptkey . ,(vector "Reptkey (Vigenere)"
-                        reptkey-encipher
-                        reptkey-decipher))
-    (monokey . ,(vector "Monoalphabetic"
-                        mono-encipher
-                        mono-decipher))
-    (caesar . ,(vector "Caesar"
-                       caesar-encipher
-                       caesar-decipher))
-    (rot13 . ,(vector "ROT13"
-                      rot13
-                      rot13))))
+  `(("Autokey" ,autokey-encipher ,autokey-decipher)
+    ("Reptkey (Vigenere)" ,reptkey-encipher ,reptkey-decipher)
+    ("Monoalphabetic" ,mono-encipher ,mono-decipher)
+    ("Caesar" ,caesar-encipher caesar-decipher)
+    ("ROT13" ,rot13 ,rot13)))
 
 (define (add-components-to-pane pane ::Container)
   (define grid-container ::JPanel (JPanel))
@@ -44,10 +34,7 @@
   (define cipher-kind ::JComboBox
     (let ()
       (define x ::String[]
-        (apply String[]
-               (map (lambda (p)
-                      (vector-ref (cdr p) 0))
-                    cipher-list)))
+        (apply String[] (map car cipher-list)))
       (JComboBox x)))
   (define go-button ::JButton (JButton "Hello world"))
   (define output-label ::JLabel (JLabel "Output text:"))
