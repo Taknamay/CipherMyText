@@ -5,9 +5,28 @@
 (import (class java.awt BorderLayout GridLayout Dimension Container)
         (class javax.swing
                JFrame JPanel JComboBox JButton SwingUtilities
-               JSeparator JLabel))
+               JSeparator JLabel)
+        (macduffie cipher))
 
 (define frame ::JFrame #!null)
+
+(define cipher-list
+  ;; Create an association lists for the ciphers
+  `((autokey . ,(vector "Autokey"
+                        autokey-encipher
+                        autokey-decipher))
+    (reptkey . ,(vector "Reptkey (Vigenere)"
+                        reptkey-encipher
+                        reptkey-decipher))
+    (monokey . ,(vector "Monoalphabetic"
+                        mono-encipher
+                        mono-decipher))
+    (caesar . ,(vector "Caesar"
+                       caesar-encipher
+                       caesar-decipher))
+    (rot13 . ,(vector "ROT13"
+                      rot13
+                      rot13))))
 
 (define (add-components-to-pane pane ::Container)
   (define grid-container ::JPanel (JPanel))
