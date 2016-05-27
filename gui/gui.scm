@@ -49,6 +49,9 @@
   
   ;; Set the layout for gridLayout
   (grid-container:setLayout layout)
+
+  ;; Limit the height of the key field
+  (key-text:setPreferredSize (Dimension 150 20))
   
   ;; Set the listener for go-button
   (go-button:addActionListener
@@ -62,6 +65,7 @@
   (grid-container:add input-text-pane)
   (grid-container:add key-label)
   (grid-container:add key-text)
+  (grid-container:add (JPanel))
   (grid-container:add go-button)
   (grid-container:add output-label)
   (grid-container:add output-text-pane)
