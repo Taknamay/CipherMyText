@@ -6,7 +6,7 @@
         (class javax.swing
                JFrame JPanel JComboBox JButton SwingUtilities
                JSeparator JLabel JTextField JTextArea
-               JScrollPane)
+               JScrollPane JRadioButton ButtonGroup)
         (macduffie cipher))
 
 (define frame ::JFrame #!null)
@@ -38,6 +38,9 @@
   (define input-text-pane (JScrollPane input-text))
   (define key-label ::JLabel (JLabel "Key:"))
   (define key-text (JTextField 20))
+  (define radio-encipher (JRadioButton "Encipher"))
+  (define radio-decipher (JRadioButton "Decipher"))
+  (define cipher-mode (JPanel))
   (define go-button ::JButton (JButton "Hello world"))
   (define output-label ::JLabel (JLabel "Output text:"))
   (define output-text (JTextArea))
@@ -59,12 +62,22 @@
      (display event)
      (newline)
      (newline)))
+
+  ;; Add buttons to cipher-mode
+  (cipher-mode:add radio-encipher)
+  (cipher-mode:add radio-decipher)
+
+  ;; Group buttons for cipher-mode
+  (let ((g (ButtonGroup)))
+    (g:add radio-encipher)
+    (g:add radio-decipher))
   
   ;; Add components
   (grid-container:add input-label)
   (grid-container:add input-text-pane)
   (grid-container:add key-label)
   (grid-container:add key-text)
+  (grid-container:add cipher-mode)
   (grid-container:add (JPanel))
   (grid-container:add go-button)
   (grid-container:add output-label)
