@@ -59,10 +59,19 @@
      (define proc
        (list-ref (assoc kind cipher-list)
                  (if encipher? 1 2)))
-     (display proc)
-     (newline)
-     (newline)))
-
+     (define text-in (input-text:getText))
+     (define key (key-text:getText))
+     (define text-out
+       (cond
+        ((or (eq? proc caesar-encipher)
+             (eq? proc caesar-decipher))
+         (apply-cipher proc #f text-in (string->number key)))
+        ((eq? proc rot13)
+         (apply-cipher proc #f text-in))
+        (else
+         (apply-cipher proc #f text-in key))))
+     (output-text:setText text-out)))
+  
   ;; Add buttons to cipher-mode
   (cipher-mode:add radio-encipher)
   (cipher-mode:add radio-decipher)
