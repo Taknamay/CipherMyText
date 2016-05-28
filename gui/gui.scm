@@ -115,6 +115,8 @@
   ;; Create and set up the window
   (set! frame (JFrame "CipherMyText!"))
   (frame:setDefaultCloseOperation JFrame:EXIT_ON_CLOSE)
+  ;; Give the frame a minimum size
+  (frame:setMinimumSize (Dimension 300 450))
   ;; Set up the content pane
   (add-components-to-pane (frame:getContentPane))
   
