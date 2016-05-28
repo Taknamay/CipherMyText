@@ -41,6 +41,13 @@
   (define output-text ::JTextArea (JTextArea))
   (define output-text-pane ::JScrollPane (JScrollPane output-text))
 
+  ;; The user cannot edit the output text
+  (output-text:setEditable #f)
+
+  ;; Make the text areas wrap text
+  (input-text:setLineWrap #t)
+  (output-text:setLineWrap #t)
+
   ;; Set the gap for the grid
   (layout:setHgap 25)
   (layout:setVgap 25)
@@ -70,7 +77,7 @@
          (apply-cipher proc #f text-in))
         (else
          (apply-cipher proc #f text-in key))))
-     (output-text:setText text-out)))
+     (output-text:setText (print-letters text-out))))
   
   ;; Add buttons to cipher-mode
   (cipher-mode:add radio-encipher)
