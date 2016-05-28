@@ -3,7 +3,6 @@
   (import (scheme base)
           (scheme case-lambda)
           (scheme char)
-          (scheme write)
           (srfi 1)
           (macduffie queue))
   (export

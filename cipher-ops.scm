@@ -90,16 +90,23 @@
     ;; Space out the letters of s by groups of 5, and
     ;; pad the end by repeating a character.
     (let loop ((l (string->list s))
+               (out '())
                (i 0))
       (if (null? l)
-          (display (make-string (- 5 i) pad))
+          (if (< i 5)
+              (loop '()
+                    (cons pad out)
+                    (+ i 1))
+              (apply string (reverse out)))
           (cond
            ((< i 5)
-            (display (car l))
-            (loop (cdr l) (+ i 1)))
+            (loop (cdr l)
+                  (cons (car l) out)
+                  (+ i 1)))
            (else
-            (display " ")
-            (loop l 0))))))))
+            (loop l
+                  (cons #\space out)
+                  0))))))))
 
 (define (runkey-encipher pt-in key-in)
   ;; Simplest polyalphabetic cipher. Potentially useful
