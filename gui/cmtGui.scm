@@ -8,7 +8,7 @@
   (class javafx.scene.layout StackPane)
   (class javafx.stage Stage StageBuilder))
 
-(module-name cmtGui)
+(module-name gui.cmtGui)
 
 (define-simple-class cmtGui (Application)
   ((start (primary-stage ::Stage)) ::void
