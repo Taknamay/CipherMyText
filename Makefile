@@ -14,7 +14,7 @@ macduffie/queue.class:	queue.sld queue.body.scm
 app:	cmt.jar
 
 cmt.jar:	cmtApp.class Manifest.txt
-	jar cvfm cmt.jar Manifest.txt kawa gnu macduffie gui
+	jar cvfm cmt.jar Manifest.txt kawa gnu macduffie *.class
 
 cmtApp.class:	cmtGui.class cmtApp.scm
 	kawa --main -C cmtApp.scm
