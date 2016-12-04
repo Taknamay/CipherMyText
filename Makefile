@@ -13,17 +13,14 @@ macduffie/queue.class:	queue.sld queue.body.scm
 
 app:	cmt.jar
 
-cmt.jar:	gui/cmtApp.class Manifest.txt
+cmt.jar:	cmtApp.class Manifest.txt
 	jar cvfm cmt.jar Manifest.txt kawa gnu macduffie gui
 
-gui/cmtApp.class:	gui/cmtGui.class gui/cmtApp.scm
-	kawa --main -C gui/cmtApp.scm
+cmtApp.class:	cmtGui.class cmtApp.scm
+	kawa --main -C cmtApp.scm
 
-gui/cmtGui.class:	gui/cmtGui.scm
-	kawa -C gui/cmtGui.scm
-
-#gui/gui.class:	gui/gui.scm
-#	kawa --main -C gui/gui.scm
+cmtGui.class:	cmtGui.scm
+	kawa -C cmtGui.scm
 
 clean:
 	rm -f *.class */*.class
