@@ -41,21 +41,39 @@
       (width 200)
       (height 100)
       (closing ,(lambda (wi) (ui:quit!))))
-   (vbox
-    (label
-     (@ (text "Enter your name:")))
-    (entry
-     (@ (id name)
-        (text "")
-        (read-only? #f)))
-    (button
-     (@ (id btn)
-        (text "Greet")
-        (clicked ,btn-press)))
-    (entry
-     (@ (id greeting)
-        (text "")
-        (read-only? #t))))))
+   (grid
+    (item
+     (@ (left 0) (top 0))
+     (label
+      (@ (text "Input text:"))))
+    (item
+     (@ (left 1) (top 0))
+     (entry
+      (@ (id input-field)
+         (text "")
+         (read-only? #f))))
+    (item
+     (@ (left 0) (top 1))
+     (label
+      (@ (text "Key:"))))
+    (item
+     (@ (left 1) (top 1))
+     (entry
+      (@ (id key-field)
+         (text "")
+         (read-only? #f))))
+    (item
+     (@ (left 0) (top 2))
+     (button
+      (@ (id btn)
+         (text "Greet")
+         (clicked ,btn-press))))
+    (item
+     (@ (left 1) (top 2))
+     (entry
+      (@ (id greeting)
+         (text "")
+         (read-only? #t)))))))
 
 (ui:control-show! (ui:->control (ui:widget-by-id 'main)))
 (ui:main)
