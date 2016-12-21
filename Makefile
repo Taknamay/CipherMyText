@@ -13,4 +13,4 @@ macduffie.queue.so:	queue.sld
 	$(CSC) -library queue.sld -o macduffie.queue.so
 
 clean:
-	rm -f *.so
+	rm -f *.so cmt
