@@ -17,5 +17,10 @@ install:	cmt
 	cp macduffie.cipher.so macduffie.queue.so $(INSTALL_PATH)/lib/chicken/8/
 	cp cmt $(INSTALL_PATH)/bin/
 
+uninstall:
+	rm -f $(INSTALL_PATH)/lib/chicken/8/macduffie.cipher.so
+	rm -f $(INSTALL_PATH)/lib/chicken/8/macduffie.queue.so
+	rm -f $(INSTALL_PATH)/bin/cmt
+
 clean:
 	rm -f *.so cmt
