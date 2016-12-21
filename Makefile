@@ -1,7 +1,10 @@
 
 CSC=csc -R r7rs
 
-all:	macduffie.cipher.so
+all:	cmt
+
+cmt:	cmt.scm macduffie.cipher.so
+	$(CSC) -X macduffie.queue.so -X macduffie.cipher.so cmt.scm -o cmt
 
 macduffie.cipher.so:	cipher.sld macduffie.queue.so
 	$(CSC) -X macduffie.queue.so -library cipher.sld -o macduffie.cipher.so
