@@ -6,6 +6,7 @@
   (scheme base)
   (scheme read)
   (scheme write)
+  (macduffie queue)
   (macduffie cipher)
   (libui))
 
