@@ -27,9 +27,10 @@
 
 (define (btn-press bt)
   (ui:entry-text-set!
-   (ui:widget-by-id 'greeting)
+   (ui:widget-by-id 'output-field)
    (string-append "Hello, "
-                  (ui:entry-text (ui:widget-by-id 'name))
+                  (ui:entry-text (ui:widget-by-id 'input-field))
+                  (ui:entry-text (ui:widget-by-id 'key-field))
                   "!")))
 
 (ui:init!)
@@ -71,7 +72,7 @@
     (item
      (@ (left 1) (top 2))
      (entry
-      (@ (id greeting)
+      (@ (id output-field)
          (text "")
          (read-only? #t)))))))
 
