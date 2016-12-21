@@ -1,5 +1,6 @@
 
 CSC=csc -R r7rs
+INSTALL_PATH=/usr/local
 
 all:	cmt
 
@@ -11,6 +12,10 @@ macduffie.cipher.so:	cipher.sld macduffie.queue.so
 
 macduffie.queue.so:	queue.sld
 	$(CSC) -library queue.sld -o macduffie.queue.so
+
+install:	cmt
+	cp macduffie.cipher.so macduffie.queue.so $(INSTALL_PATH)/lib/chicken/8/
+	cp cmt $(INSTALL_PATH)/bin/
 
 clean:
 	rm -f *.so cmt
