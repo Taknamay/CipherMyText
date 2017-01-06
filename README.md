@@ -4,9 +4,7 @@ CipherMyText is a set of tools for enciphering messages. Previously the tools we
 
 Dependencies
 ------------
-The only dependencies are Java and [Kawa](https://gnu.org/s/kawa/). If you have a reasonably recent version of Java, Kawa is very easy to install.
-
-The tools are portable among R7RS implementations to a fair degree, but sometimes I use Java libraries. However the code is meant to be written in a way to allow easy porting if you are interested.
+Although the GUI application requires Chicken and libui, the suite itself is written in portable R7RS Scheme. View your implementation documentation for details about installing R7RS libraries.
 
 Notice
 ------
