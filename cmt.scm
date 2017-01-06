@@ -38,11 +38,12 @@
 (ui:widgets
  `(window
    (@ (id main)
-      (title "Hello")
-      (width 200)
-      (height 100)
+      (title "CipherMyText")
+      (width 300)
+      (height 300)
       (closing ,(lambda (wi) (ui:quit!))))
    (grid
+    ;; Input []
     (item
      (@ (left 0) (top 0))
      (label
@@ -53,6 +54,7 @@
       (@ (id input-field)
          (text "")
          (read-only? #f))))
+    ;; Key []
     (item
      (@ (left 0) (top 1))
      (label
@@ -63,14 +65,24 @@
       (@ (id key-field)
          (text "")
          (read-only? #f))))
+    ;; Encrypt/decrypt  cipher type
     (item
      (@ (left 0) (top 2))
+     (radio-buttons "Encrypt" "Decrypt"))
+    ;; Go
+    (item
+     (@ (left 1) (top 3))
      (button
       (@ (id btn)
-         (text "Greet")
+         (text "Go!")
          (clicked ,btn-press))))
+    ;; Output []
     (item
-     (@ (left 1) (top 2))
+     (@ (left 0) (top 4))
+     (label
+      (@ (text "Output text:"))))
+    (item
+     (@ (left 1) (top 4))
      (entry
       (@ (id output-field)
          (text "")
